@@ -12,7 +12,7 @@ export class ProductsService {
   ) {}
 
   create(createProductDto: CreateProductDto) {
-    return 'This action adds a new product';
+    return this.productsRepository.save(createProductDto);
   }
 
   findAll() {
