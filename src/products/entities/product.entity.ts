@@ -12,10 +12,10 @@ export class Product {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ length: 64 })
   name: string;
 
-  @Column()
+  @Column({ type: 'float' })
   price: number;
 
   @CreateDateColumn()
