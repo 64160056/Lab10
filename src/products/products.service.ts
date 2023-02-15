@@ -20,7 +20,7 @@ export class ProductsService {
   }
 
   findOne(id: number) {
-    return this.productsRepository.find({ where: { id } });
+    return this.productsRepository.findOne({ where: { id } });
   }
 
   async update(id: number, updateProductDto: UpdateProductDto) {
@@ -29,11 +29,14 @@ export class ProductsService {
     if (!product) {
       throw new NotFoundException();
     }
-    this.productsRepository.save(updateProductDto);
     return this.productsRepository.save(updatedProduct);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} product`;
+  async remove(id: number) {
+    const product = await this.productsRepository.findOneBy({ id });
+    if (!product) {
+      throw new NotFoundException();
+    }
+    return this.productsRepository.softRemove(product);
   }
 }
