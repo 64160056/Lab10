@@ -10,11 +10,17 @@ import { ProductsModule } from './products/products.module';
   imports: [
     ProductsModule,
     TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: 'db.sqlite',
+      // ลิ้งค์ database http://localhost/phpmyadmin อย่าลืมใช้ xampp ด้วยนะ
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: '',
+      database: 'product_db', // ชื่อฐานข้อมูลที่คุณต้องการใช้
       entities: [Product],
-      synchronize: true,
+      synchronize: true, // ใช้ true สำหรับการพัฒนาหรือ testing, ควรตั้งเป็น false ใน production
     }),
+    ProductsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
